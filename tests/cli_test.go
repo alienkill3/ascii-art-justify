@@ -24,7 +24,7 @@ func TestParseCLIArgs(t *testing.T) {
 	})
 
 	t.Run("color substring font", func(t *testing.T) {
-		cfg, err := src.ParseCLIArgs([]string{"--color=rgb'(255, 0, 0)'", "e", "hello", "shadow"})
+		cfg, err := src.ParseCLIArgs([]string{"--color=rgb(255, 0, 0)", "e", "hello", "shadow"})
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}

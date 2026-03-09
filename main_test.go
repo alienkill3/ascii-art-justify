@@ -46,57 +46,57 @@ func TestMainProcess(t *testing.T) {
 		},
 		{
 			name:     "RGB color format with substring and font",
-			args:     []string{"--color", "rgb(255, 0, 0)", "e", "hello", "shadow"},
+			args:     []string{"--color=rgb(255, 0, 0)", "e", "hello", "shadow"},
 			wantExit: 0,
 		},
 		{
 			name:     "wrong flag with substring and font",
-			args:     []string{"---color", "rgb(255, 0, 0)", "e", "hello", "shadow"},
+			args:     []string{"---color=rgb(255, 0, 0)", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "wrong RGB color format with substring and font",
-			args:     []string{"--color", "rgb(256, 0, 0)", "e", "hello", "shadow"},
+			args:     []string{"--color=rgb(256, 0, 0)", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "wrong RGB color format with substring and font",
-			args:     []string{"--color", "rgb(256, 0, 0", "e", "hello", "shadow"},
+			args:     []string{"--color=rgb(256, 0, 0", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "wrong RGB color format with substring and font",
-			args:     []string{"--color", "rgb(56, 10, 10, 30)", "e", "hello", "shadow"},
+			args:     []string{"--color=rgb(56, 10, 10, 30)", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "#hex color format with substring and font",
-			args:     []string{"--color", "#00ff00", "e", "hello", "shadow"},
+			args:     []string{"--color=#00ff00", "e", "hello", "shadow"},
 			wantExit: 0,
 		},
 		{
 			name:     "wrong length #hex color format with substring and font",
-			args:     []string{"--color", "#00ff00f", "e", "hello", "shadow"},
+			args:     []string{"--color=#00ff00f", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "wrong #hex color format with substring and font",
-			args:     []string{"--color", "#00gg00", "e", "hello", "shadow"},
+			args:     []string{"--color=#00gg00", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "named color format with substring and font",
-			args:     []string{"--color", "red", "e", "hello", "shadow"},
+			args:     []string{"--color=red", "e", "hello", "shadow"},
 			wantExit: 0,
 		},
 		{
 			name:     "wrong named color format with substring and font",
-			args:     []string{"--color", "rad", "e", "hello", "shadow"},
+			args:     []string{"--color=rad", "e", "hello", "shadow"},
 			wantExit: 1,
 		},
 		{
 			name:     "named color format with substring and wrong font",
-			args:     []string{"--color", "red", "s", "sa", "shadw"},
+			args:     []string{"--color=red", "s", "sa", "shadw"},
 			wantExit: 1,
 		},
 	}
@@ -294,7 +294,7 @@ func TestOutput_RGBColorSubstrHelloShadow(t *testing.T) {
 		t.Fatalf("failed to read golden file: %v", err)
 	}
 
-	got := runMainAndGetStdoutWithFlags(t, "--color=rgb'(255, 0, 0)'", "e", "hello", "shadow")
+	got := runMainAndGetStdoutWithFlags(t, "--color=rgb(255, 0, 0)", "e", "hello", "shadow")
 
 	if !bytes.Equal(got, golden) {
 		t.Fatalf("stdout mismatch\n--- got ---\n%s\n--- want (golden) ---\n%s", got, golden)
